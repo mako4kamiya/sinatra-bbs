@@ -1,0 +1,14 @@
+CREATE TABLE users (
+  id SERIAL NOT NULL PRIMARY KEY ,
+  name VARCHAR( 25 ) NOT NULL ,
+  email VARCHAR( 35 ) NOT NULL ,
+  password VARCHAR( 60 ) NOT NULL ,
+  UNIQUE (email)
+);
+
+CREATE TABLE posts (
+    id SERIAL NOT NULL PRIMARY KEY ,
+    user_id INTEGER NOT NULL,
+    content TEXT NOT NULL ,
+    image_path VARCHAR(512)
+);

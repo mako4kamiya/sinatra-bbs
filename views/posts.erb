@@ -1,0 +1,36 @@
+<% if session[:user] %>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="ログアウト">
+    </form>
+<% end %>
+
+<form action="/posts" method="post" enctype="multipart/form-data">
+    <% if session[:user].nil? %>
+        <div>
+        <label for="name">名前: </label>
+        <input type="text" name="name">
+        </div>
+    <% else %>
+        <input type="hidden" name="name" value="<%= session[:user]["name"] %>">
+    <% end %>
+
+    <div>
+        <label for="content">投稿内容: </label>
+        <textarea name="content" cols=50 rows=10></textarea>
+    </div>
+
+    <div>
+        <label for="image">画像: </label>
+        <input type="file" name="image">
+    </div>
+
+    <input type="submit" value="投稿">
+</form>
+
+
+<% @posts.each do |post| %>
+    <p><%= post['user_id']%></p>
+    <p><%= post['content'] %></p>
+    <img src="/images/<%= post['image_path'] %>" width="300px">
+<% end %>
