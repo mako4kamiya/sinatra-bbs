@@ -56,7 +56,7 @@ get '/posts' do
     if session[:user].nil?
         return redirect '/login'
     end
-    @posts = client.exec_params("SELECT * from posts").to_a
+    @posts = client.exec_params("SELECT * FROM posts JOIN users ON posts.user_id = users.id").to_a
     return erb :posts
 end
 
