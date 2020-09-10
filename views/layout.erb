@@ -12,12 +12,21 @@
     <nav class="navbar navbar-dark bg-dark justify-content-between" style="background-color: #e3f2fd;">
         <a class="navbar-brand" href="#">Sinatra BBS</a>
         <ul class="navbar-nav flex-row">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
+            <% if session[:user] %>
+                <li class="nav-item">
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="_method" value="DELETE"> <!-- この1行を追加！ -->
+                        <input class="nav-link border-0" type="submit" value="logout">
+                    </form>
+                </li>
+            <% else %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup">signup</a>
+                </li>
+            <% end %>
         </ul>
     </nav>
     <main class="container mt-5">

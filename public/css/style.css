@@ -1,3 +1,4 @@
-.hello {
-    color: red;
+input[type="submit"] {
+    border: none;
+    background-color: unset;
 }
