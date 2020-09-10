@@ -1,8 +1,10 @@
+CREATE DATABASE sinatra_bbs;
+
 CREATE TABLE users (
   id SERIAL NOT NULL PRIMARY KEY ,
   name VARCHAR( 25 ) NOT NULL ,
   email VARCHAR( 35 ) NOT NULL ,
-  password VARCHAR( 60 ) NOT NULL ,
+  password VARCHAR( 512 ) NOT NULL ,
   UNIQUE (email)
 );
 
