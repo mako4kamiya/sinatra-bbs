@@ -1,4 +1,4 @@
-input[type="submit"] {
+.navbar-nav input[type="submit"] {
     border: none;
     background-color: unset;
 }
