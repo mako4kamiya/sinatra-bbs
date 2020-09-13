@@ -1,0 +1,24 @@
+CREATE DATABASE sinatra_bbs;
+
+CREATE TABLE users (
+  id SERIAL NOT NULL PRIMARY KEY ,
+  name VARCHAR( 25 ) NOT NULL ,
+  email VARCHAR( 35 ) NOT NULL ,
+  password_digest VARCHAR( 512 ) NOT NULL ,
+  profile_img TEXT,
+  UNIQUE (email)
+);
+
+サンプルユーザー
+password = "sample1"
+INSERT INTO users (name, email, password_digest) VALUES ('sample1', 'sample1@mail.com', '62ac7d5c0bf240cb980187849241a751d9c5c53040e62f176377bd115ed21ec69636dbcd78b04aa4b55e23bae84decaf97a7dc2b249e84cc386c100c8ed8762c');
+
+CREATE TABLE posts (
+    id SERIAL NOT NULL PRIMARY KEY ,
+    user_id INTEGER NOT NULL,
+    content TEXT NOT NULL ,
+    image_path VARCHAR(512)
+);
+
+サンプル投稿
+INSERT INTO posts (user_id, content, image_path) VALUES (1,'ゴール決めたぞ！', 'soccer_score_woman.png');

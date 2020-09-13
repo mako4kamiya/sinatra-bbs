@@ -1,0 +1,93 @@
+<div class="row">
+    <div id="schedule_modal" class="col-12">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenter">テスト日程を登録する</button>
+        <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLongTitle">テスト日程の登録</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/schedule_post" method="post" >
+                        <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="subject">教科を選択</label>
+                                    <select class="form-control form-control-sm" id="subject" name="subject">
+                                        <option>経営戦略</option>
+                                        <option>情報数学</option>
+                                        <option>オペレーティングシステム</option>
+                                        <option>プログラミング論</option>
+                                        <option>SQL</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">日程</label>
+                                    <input class="form-control form-control-sm" type="date" name="date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="session">何時限め</label>
+                                    <select class="form-control form-control-sm" id="subject" name="session">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>放課後</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="complement">補足</label>
+                                    <textarea class="form-control form-control-sm" id="complement" name="complement" rows="1"></textarea>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="schedules" class="col-12">
+        <% @schedules.each do |schedule| %>
+            <div class="card border-light mb-3">
+                <div class="card-header"><%= schedule['date'] %>　<%= schedule['session'] %>時限目</div>
+                <div class="card-body">
+                    <h5 class="card-title"><%= schedule['subject'] %></h5>
+                    <p class="card-text"><%= schedule['complement'] %></p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+    <div id="chat" class="col-12">
+        <div class="card bg-light p-3">
+            <form action="/chat_post" method="post" class="form-inline justify-content-center">
+                <div class="form-group">
+                    <input name="content" type="text" class="form-control" placeholder="コメントする...">
+                </div>
+                <span class="form-group bmd-form-group">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </span>
+            </form>
+            <% @chats.each do |chat| %>
+            <div class="card col-12 mb-1">
+                <div class="card-header">
+                    <p class="card-text"><%= chat['content'] %></p>
+                </div>
+                <div class="mb-3">
+                    <img class="profile_img" src="/images/<%= chat['profile_img'] %>" alt="<%= chat['profile_img'] %>">
+                    <small class="text-muted"><%= chat['name']%></small>
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
