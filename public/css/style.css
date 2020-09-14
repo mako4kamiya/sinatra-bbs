@@ -1,6 +1,7 @@
-.navbar-nav input[type="submit"] {
+.navbar-nav input[type="submit"], #schedules input[type="submit"] {
   border: none;
   background-color: unset;
+  cursor: pointer;
 }
 
 .profile_img {
@@ -19,7 +20,11 @@
           align-items: center;
 }
 
-#schedule_modal {
+#schedules .card-footer form {
+  display: inline;
+}
+
+#schedules #schedule_modal {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;

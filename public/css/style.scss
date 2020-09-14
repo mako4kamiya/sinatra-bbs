@@ -1,6 +1,9 @@
-.navbar-nav input[type="submit"] {
-    border: none;
-    background-color: unset;
+.navbar-nav ,#schedules {
+    input[type="submit"] {
+        border: none;
+        background-color: unset;
+        cursor: pointer;
+    }
 }
 .profile_img {
     width: 30px;
@@ -13,9 +16,14 @@
     align-items: center;
 }
 
-#schedule_modal {
-    justify-content: center;
-    display: flex;
+#schedules {
+    .card-footer form {
+        display: inline;
+    }
+    #schedule_modal {
+        justify-content: center;
+        display: flex;
+    }
 }
 #chat {
     .profile_img {

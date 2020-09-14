@@ -61,6 +61,21 @@
                     <h5 class="card-title"><%= schedule['subject'] %></h5>
                     <p class="card-text"><%= schedule['complement'] %></p>
                 </div>
+                <div class="card-footer">
+                    <% if schedule['published'] == "t" %>
+                        <span class="badge badge-pill badge-info" for="badge-info">未実施</span>
+                        <form action="/schedule_delete/<%= schedule['id'] %>" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input class="text-secondary" type="submit" value="削除">
+                        </form>
+                    <% else %>
+                        <span href="#" class="badge badge-pill badge-secondary">終了</span>
+                        <form action="/schedule_delete/<%= schedule['id'] %>" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input class="text-secondary" type="submit" value="削除">
+                        </form>
+                    <% end %>
+                </div>
             </div>
         <% end %>
     </div>

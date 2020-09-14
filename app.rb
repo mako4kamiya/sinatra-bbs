@@ -69,8 +69,14 @@ post '/schedule_post' do
     date = params[:date]
     session = params[:session]
     complement = params[:complement]
-    client.exec_params("INSERT INTO schedules (subject, date, session, complement) VALUES ($1, $2, $3, $4)",[subject, date, session, complement])
+    published = 'on'
+    client.exec_params("INSERT INTO schedules (subject, date, session, complement, published) VALUES ($1, $2, $3, $4, $5)",[subject, date, session, complement, published])
     redirect '/home'
+end
+
+delete '/schedule_delete/:id' do
+    client.exec_params("DELETE FROM schedules WHERE id =$1",[params[:id]])
+    redirect '/home'    
 end
 
 post '/chat_post' do
