@@ -62,7 +62,7 @@
                     <p class="card-text"><%= schedule['complement'] %></p>
                 </div>
                 <div class="card-footer">
-                    <% if schedule['published'] == "t" %>
+                    <% if schedule['date'] >= @today %>
                         <span class="badge badge-pill badge-info" for="badge-info">未実施</span>
                         <form action="/schedule_delete/<%= schedule['id'] %>" method="post">
                             <input type="hidden" name="_method" value="DELETE">

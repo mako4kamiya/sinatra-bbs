@@ -57,6 +57,7 @@ get '/home' do
     if session[:user].nil?
         return redirect '/'
     end
+    @today = Date.today.to_s
     @user =  client.exec_params("SELECT * FROM users WHERE id = $1",[session[:user]['id']]).to_a.first
     @chats = client.exec_params("SELECT * FROM chats JOIN users ON chats.user_id = users.id ORDER BY chats.id DESC").to_a
     @schedules = client.exec_params("SELECT * FROM schedules ORDER BY date").to_a
@@ -69,8 +70,7 @@ post '/schedule_post' do
     date = params[:date]
     session = params[:session]
     complement = params[:complement]
-    published = 'on'
-    client.exec_params("INSERT INTO schedules (subject, date, session, complement, published) VALUES ($1, $2, $3, $4, $5)",[subject, date, session, complement, published])
+    client.exec_params("INSERT INTO schedules (subject, date, session, complement) VALUES ($1, $2, $3, $4)",[subject, date, session, complement])
     redirect '/home'
 end
 
