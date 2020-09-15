@@ -38,7 +38,7 @@
                                             <option>5</option>
                                             <option>6</option>
                                             <option>7</option>
-                                            <option>放課後</option>
+                                            <option>8</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -99,10 +99,9 @@
                 <div class="mb-3">
                     <img class="profile_img" src="/images/<%= chat['profile_img'] %>" alt="<%= chat['profile_img'] %>">
                     <small class="text-muted"><%= chat['name']%></small>
-                    <small class="text-muted"> mins ago</small>
+                    <small class="text-muted"><%= chat['created_at'].slice(0..15) %></small>
+                    <!-- <small class="text-muted"> mins ago</small> -->
                 </div>
-                <%= Time.new %>
-                <%= chat['created_at'] %>
             </div>
             <% end %>
         </div>
