@@ -1,0 +1,16 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">
+        <h1><%= @user['name'] %> さん</h1>
+        <img class="profile_img" src="/images/<%= @user['profile_img'] %>" alt="<%= @user['profile_img'] %>">
+        <span><%= @user['email'] %></span>
+    </div>
+    <div class="card-body">
+        <form action="/signup" method="post">
+            <div class="form-group custom-file">
+                <label class="custom-file-label" for="profile_img">画像を変更</label>
+                <input type="file" class="custom-file-input" id="profile_img" name="profile_img">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

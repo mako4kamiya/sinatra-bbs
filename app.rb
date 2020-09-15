@@ -30,8 +30,15 @@ post '/signup' do
     return redirect '/home'
 end
 
+get '/user' do
+    @user = session[:user]
+    return erb :user
+end
+
 post '/user_edit' do
-    # UPDATE users SET profile_img = 'default_user.png' WHERE id = 1;
+    filename = params['profile_img']['filename']
+    tempfile = params['profile_img']['tempfile']
+    client.exec_params("UPDATE users SET profile_img = $1 WHERE id = $2",[])
 end
 
 get '/' do
