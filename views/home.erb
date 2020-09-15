@@ -99,8 +99,10 @@
                 <div class="mb-3">
                     <img class="profile_img" src="/images/<%= chat['profile_img'] %>" alt="<%= chat['profile_img'] %>">
                     <small class="text-muted"><%= chat['name']%></small>
-                    <small class="text-muted">3 mins ago</small>
+                    <small class="text-muted"> mins ago</small>
                 </div>
+                <%= Time.new %>
+                <%= chat['created_at'] %>
             </div>
             <% end %>
         </div>

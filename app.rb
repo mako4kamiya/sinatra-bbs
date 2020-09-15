@@ -84,7 +84,7 @@ get '/home' do
     @user =  client.exec_params("SELECT * FROM users WHERE id = $1",[session[:user]['id']]).to_a.first
     @chats = client.exec_params("SELECT * FROM chats JOIN users ON chats.user_id = users.id ORDER BY chats.id DESC").to_a
     @schedules = client.exec_params("SELECT * FROM schedules ORDER BY date DESC").to_a
-    # binding.pry
+    # binding.irb
     return erb :home
 end
 
