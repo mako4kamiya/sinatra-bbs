@@ -15,7 +15,7 @@
             <% if session[:user] %>
                 <li class="nav-item nav-profile">
                     <img class="profile_img" src="/images/<%= @user['profile_img'] %>" alt="<%= @user['profile_img'] %>">
-                    <a href="/user"><span class="text-muted"><%= @user['name']%></span></a>
+                    <a href="/user""><span><%= @user['name']%></span></a>
                 </li>
                 <li class="nav-item">
                     <form action="/logout" method="post">

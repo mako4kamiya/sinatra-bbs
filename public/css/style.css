@@ -20,6 +20,10 @@
           align-items: center;
 }
 
+#schedules .card-header .badge {
+  float: right;
+}
+
 #schedules .card-footer form {
   display: inline;
 }
@@ -31,6 +35,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+#schedules #schedule_modal #dateHelp {
+  float: right;
 }
 
 #chat .profile_img {

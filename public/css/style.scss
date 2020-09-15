@@ -17,12 +17,20 @@
 }
 
 #schedules {
+    .card-header {
+        .badge {
+            float: right;
+        }
+    }
     .card-footer form {
         display: inline;
     }
     #schedule_modal {
         justify-content: center;
         display: flex;
+        #dateHelp {
+            float: right;
+        }
     }
 }
 #chat {

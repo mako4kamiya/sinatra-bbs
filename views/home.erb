@@ -25,7 +25,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="date">日程</label>
-                                        <input class="form-control form-control-sm" type="date" name="date">
+                                        <input class="form-control form-control-sm"　aria-describedby="dateHelp" type="date" name="date">
+                                        <small id="dateHelp" class="form-text text-muted">カレンダーから選択↑↑</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="session">何時限め</label>
@@ -42,7 +43,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="complement">補足</label>
-                                        <textarea class="form-control form-control-sm" id="complement" name="complement" rows="1"></textarea>
+                                        <textarea class="form-control form-control-sm" id="complement" aria-describedby="complementHelp" name="complement" rows="1"></textarea>
+                                        <small id="complementHelp" class="form-text text-muted">例）教本p123　キタミ式p123</small>
                                     </div>
                             </div>
                             <div class="modal-footer">
@@ -56,25 +58,28 @@
         </div>
         <% @schedules.each do |schedule| %>
             <div class="card border-light mb-3">
-                <div class="card-header"><%= schedule['date'] %>　<%= schedule['session'] %>時限目</div>
+                <div class="card-header">
+                    <span><%= schedule['date'] %>　<%= schedule['session'] %>時限目</span>
+                    <% if schedule['date'] >= @today %>
+                            <span class="badge badge-pill badge-info" for="badge-info">未実施</span>
+                    <% else %>
+                            <span class="badge badge-pill badge-secondary">終了</span>
+                    <% end %>
+                </div>
                 <div class="card-body">
                     <h5 class="card-title"><%= schedule['subject'] %></h5>
                     <p class="card-text"><%= schedule['complement'] %></p>
                 </div>
-                <div class="card-footer">
-                    <% if schedule['date'] >= @today %>
-                        <span class="badge badge-pill badge-info" for="badge-info">未実施</span>
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                        <small class="text-muted">set by <%= @user['name']%></small>
+                    </div>
+                    <div>
                         <form action="/schedule_delete/<%= schedule['id'] %>" method="post">
                             <input type="hidden" name="_method" value="DELETE">
                             <input class="text-secondary" type="submit" value="削除">
                         </form>
-                    <% else %>
-                        <span href="#" class="badge badge-pill badge-secondary">終了</span>
-                        <form action="/schedule_delete/<%= schedule['id'] %>" method="post">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input class="text-secondary" type="submit" value="削除">
-                        </form>
-                    <% end %>
+                    </div>
                 </div>
             </div>
         <% end %>
