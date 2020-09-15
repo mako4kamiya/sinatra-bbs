@@ -30,6 +30,9 @@ post '/signup' do
     return redirect '/home'
 end
 
+post '/user_edit' do
+    # UPDATE users SET profile_img = 'default_user.png' WHERE id = 1;
+end
 
 get '/' do
     return erb :login

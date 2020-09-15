@@ -23,7 +23,10 @@
                         <input class="nav-link border-0" type="submit" value="logout">
                     </form>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">edit</a>
+                    <form action="/user_edit" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input class="nav-link border-0" type="submit" value="edit">
+                    </form>
                 </li>
                 </li>
             <% else %>
