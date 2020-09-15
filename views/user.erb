@@ -5,7 +5,7 @@
         <span><%= @user['email'] %></span>
     </div>
     <div class="card-body">
-        <form action="/signup" method="post">
+        <form action="/user_edit" method="post" enctype="multipart/form-data">
             <div class="form-group custom-file">
                 <label class="custom-file-label" for="profile_img">画像を変更</label>
                 <input type="file" class="custom-file-input" id="profile_img" name="profile_img">
@@ -14,3 +14,4 @@
         </form>
     </div>
 </div>
+<a href="/home">homeにもどる</a>

@@ -32,17 +32,30 @@ end
 
 get '/user' do
     @user = session[:user]
+    # binding.pry
     return erb :user
 end
 
 post '/user_edit' do
-    filename = params['profile_img']['filename']
-    tempfile = params['profile_img']['tempfile']
-    client.exec_params("UPDATE users SET profile_img = $1 WHERE id = $2",[])
+    user_id = session[:user]['id']
+    filename = params[:profile_img][:filename]
+    tempfile = params[:profile_img][:tempfile]
+    save_to = "./public/images/#{filename}"
+    FileUtils.mv(tempfile, save_to)
+    # binding.pry
+    client.exec_params("UPDATE users SET profile_img = $1 WHERE id = $2",[filename, user_id])
+    user = client.exec_params("SELECT * from users WHERE id = $1", [user_id]).to_a.first
+    session[:user] = user
+    # binding.pry
+    redirect '/user'
 end
 
 get '/' do
-    return erb :login
+    if session[:user].nil?
+        return erb :login
+    else
+        redirect '/home'
+    end
 end
 
 post '/login' do
@@ -70,7 +83,7 @@ get '/home' do
     @today = Date.today.to_s
     @user =  client.exec_params("SELECT * FROM users WHERE id = $1",[session[:user]['id']]).to_a.first
     @chats = client.exec_params("SELECT * FROM chats JOIN users ON chats.user_id = users.id ORDER BY chats.id DESC").to_a
-    @schedules = client.exec_params("SELECT * FROM schedules ORDER BY date").to_a
+    @schedules = client.exec_params("SELECT * FROM schedules ORDER BY date DESC").to_a
     # binding.pry
     return erb :home
 end
@@ -86,7 +99,7 @@ end
 
 delete '/schedule_delete/:id' do
     client.exec_params("DELETE FROM schedules WHERE id =$1",[params[:id]])
-    redirect '/home'    
+    redirect '/home'
 end
 
 post '/chat_post' do
