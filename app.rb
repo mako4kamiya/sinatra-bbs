@@ -6,6 +6,9 @@
 require 'digest'
 require 'bundler'
 Bundler.require
+if development?
+    require 'sinatra/reloader'
+end
 
 enable :sessions
 
@@ -85,17 +88,18 @@ get '/home' do
     @today = Date.today.to_s
     @user =  client.exec_params("SELECT * FROM users WHERE id = $1",[session[:user]['id']]).to_a.first
     @chats = client.exec_params("SELECT * FROM chats JOIN users ON chats.user_id = users.id ORDER BY chats.id DESC").to_a
-    @schedules = client.exec_params("SELECT * FROM schedules ORDER BY date DESC").to_a
+    @schedules = client.exec_params("SELECT * FROM users JOIN schedules ON users.id = schedules.user_id ORDER BY date DESC").to_a
     # binding.pry
     return erb :home
 end
 
 post '/schedule_post' do
+    user_id = session[:user]['id']
     subject = params[:subject]
     date = params[:date]
     session = params[:session]
     complement = params[:complement]
-    client.exec_params("INSERT INTO schedules (subject, date, session, complement) VALUES ($1, $2, $3, $4)",[subject, date, session, complement])
+    client.exec_params("INSERT INTO schedules (user_id, subject, date, session, complement) VALUES ($1, $2, $3, $4, $5)",[user_id, subject, date, session, complement])
     redirect '/home'
 end
 
@@ -107,6 +111,8 @@ end
 post '/chat_post' do
     user_id = session[:user]["id"]
     content = params[:content]
-    client.exec_params("INSERT INTO chats (user_id, content) VALUES ($1, $2)",[user_id, content])
+    now = "now"
+    binding.pry
+    client.exec_params("INSERT INTO chats (user_id, content, created_at) VALUES ($1, $2, $3)",[user_id, content, 'now'])
     redirect '/home'
 end

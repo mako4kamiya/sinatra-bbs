@@ -59,7 +59,7 @@
         <% @schedules.each do |schedule| %>
             <div class="card border-light mb-3">
                 <div class="card-header">
-                    <span><%= schedule['date'] %>　<%= schedule['session'] %>時限目</span>
+                    <span><%= schedule['date'] %> <%= schedule['session'] %>時限目</span>
                     <% if schedule['date'] >= @today %>
                             <span class="badge badge-pill badge-info" for="badge-info">未実施</span>
                     <% else %>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <div>
-                        <small class="text-muted">set by <%= @user['name']%></small>
+                        <small class="text-muted">set by <%= schedule['name']%></small>
                     </div>
                     <div>
                         <form action="/schedule_delete/<%= schedule['id'] %>" method="post">
