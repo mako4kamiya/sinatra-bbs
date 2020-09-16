@@ -43,7 +43,6 @@ get '/user' do
         redirect '/'
     end
     @user = session[:user]
-    # binding.pry
     return erb :user
 end
 
@@ -53,11 +52,9 @@ post '/user_edit' do
     tempfile = params[:profile_img][:tempfile]
     save_to = "./public/images/#{filename}"
     FileUtils.mv(tempfile, save_to)
-    # binding.pry
     client.exec_params("UPDATE users SET profile_img = $1 WHERE id = $2",[filename, user_id])
     user = client.exec_params("SELECT * from users WHERE id = $1", [user_id]).to_a.first
     session[:user] = user
-    # binding.pry
     redirect '/user'
 end
 
@@ -93,7 +90,6 @@ get '/' do
     @today = Date.today.to_s
     @chats = client.exec_params("SELECT * FROM chats JOIN users ON chats.user_id = users.id ORDER BY chats.id DESC").to_a
     @schedules = client.exec_params("SELECT * FROM users JOIN schedules ON users.id = schedules.user_id ORDER BY date DESC").to_a
-    # binding.pry
     return erb :home
 end
 
@@ -125,7 +121,6 @@ post '/chat_post' do
     user_id = session[:user]["id"]
     content = params[:content]
     now = "now"
-    binding.pry
     client.exec_params("INSERT INTO chats (user_id, content, created_at) VALUES ($1, $2, $3)",[user_id, content, 'now'])
     redirect '/'
 end
