@@ -89,7 +89,7 @@ get '/' do
     end
     @today = Date.today.to_s
     @chats = client.exec_params("SELECT * FROM chats JOIN users ON chats.user_id = users.id ORDER BY chats.id DESC").to_a
-    @schedules = client.exec_params("SELECT * FROM users JOIN schedules ON users.id = schedules.user_id ORDER BY date DESC").to_a
+    @schedules = client.exec_params("SELECT * FROM users JOIN schedules ON users.id = schedules.user_id ORDER BY date ASC").to_a
     return erb :home
 end
 
