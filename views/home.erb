@@ -14,18 +14,12 @@
                         <form action="/schedule_post" method="post" >
                             <div class="modal-body">
                                     <div class="form-group">
-                                        <label for="subject">教科を選択</label>
-                                        <select class="form-control form-control-sm" id="subject" name="subject">
-                                            <option>経営戦略</option>
-                                            <option>情報数学</option>
-                                            <option>オペレーティングシステム</option>
-                                            <option>プログラミング論</option>
-                                            <option>SQL</option>
-                                        </select>
+                                        <label for="subject">教科名</label>
+                                        <input type="text" class="form-control form-control-sm" id="subject" name="subject" placeholder="例：経営戦略">
                                     </div>
                                     <div class="form-group">
                                         <label for="date">日程</label>
-                                        <input class="form-control form-control-sm"　aria-describedby="dateHelp" type="date" name="date">
+                                        <input class="form-control form-control-sm" aria-describedby="dateHelp" type="date" name="date">
                                         <small id="dateHelp" class="form-text text-muted">カレンダーから選択↑↑</small>
                                     </div>
                                     <div class="form-group">
