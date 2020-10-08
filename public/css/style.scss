@@ -36,6 +36,8 @@
 #chat {
     .profile_img {
         width: 15px;
+        height: 15px;
+        object-fit: cover;
         border: 1px solid gray;
         border-radius: 50%;
     }
