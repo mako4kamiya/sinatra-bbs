@@ -1,8 +1,3 @@
-# require 'sinatra'
-# require 'sinatra/reloader'
-# require 'pg'
-# require 'pry'
-# require "fileutils"
 require 'digest'
 require 'bundler'
 Bundler.require
